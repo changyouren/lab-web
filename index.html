@@ -533,6 +533,33 @@
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
         }
+    
+        /* ================= Members 板块增强样式（在读/已毕业分组） ================= */
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .member-photo-placeholder {
+            color: #aab7c8;
+            font-size: 14px;
+        }
+        .section-header {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            font-weight: 600;
+            padding-left: 12px;
+            border-left: 4px solid;
+        }
+        .section-header-current {
+            color: #1a2b4c;
+            border-left-color: #facc15;
+        }
+        .section-header-alumni {
+            color: #666;
+            border-left-color: #aab7c8;
+        }
     </style>
 </head>
 <body>
@@ -596,7 +623,7 @@
                 <div class="news-card">
                   <img src="images/News3.jpg" alt="News3" class="news-card-img">
                     <div class="news-card-content">
-                        <div class="news-card-date">June 2024</div>
+                        <div class="news-card-date">Jun. 2024</div>
                         <div class="news-card-title">Our paper on model-based versus model-free optimal tracking for soft robots, published in Nonlinear Dynamics, has been selected as an Editor's Choice Article.</div>
                     </div>
                 </div>
@@ -637,34 +664,72 @@
         </div>
     </section>
 
-    <!-- ================= Members 板块 ================= -->
+    <!-- ================= Members 板块（在读与已毕业分组） ================= -->
     <section id="members" class="container">
         <div class="section-card">
             <h2>Members</h2>
+
+            <!-- 分组1：在读成员 -->
+            <h3 class="section-header section-header-current">Current Members</h3>
+
             <div class="members-grid">
+                <!-- 在读成员 1 (PI) -->
                 <div class="member-card">
-                    <div class="member-photo">[Photo]</div>
+                    <div class="member-photo">
+                        <span class="member-photo-placeholder">[Photo]</span>
+                    </div>
                     <h3>Associate Pro. Zhaobing Liu</h3>
                     <p>Principal Investigator</p>
                     <p>Dr. Zhaobing Liu currently works at the School of Mechanical and Electronic Engineering, Wuhan University of Technology. His research interests are in robotics and control technology and advanced manufacturing. He has authored over 60 internationally refereed publications and served as reviewers for many scientific journals. Dr. Liu is ranked as the World's Top 2% Scientists in Main Field-Engineering (Single Year from 2021 to 2025 and Career Long in 2025) by Stanford and Elsevier.</p>
                 </div>
+                <!-- 在读成员 2 -->
                 <div class="member-card">
-                    <div class="member-photo">[Photo]</div>
+                    <div class="member-photo">
+                        <span class="member-photo-placeholder">[Photo]</span>
+                    </div>
                     <h3>Kaiwei Zheng - Third Year</h3>
                     <p>Master Student</p>
-                    <p>Modeling and control of soft robots</p>
+                    <p>Research interest: Modeling and control of soft robots</p>
                 </div>
+                <!-- 在读成员 3 -->
                 <div class="member-card">
-                    <div class="member-photo">[Photo]</div>
+                    <div class="member-photo">
+                        <span class="member-photo-placeholder">[Photo]</span>
+                    </div>
                     <h3>[Name]</h3>
                     <p>Master Student</p>
                     <p>[Research interest]</p>
                 </div>
+                <!-- 在读成员 4 -->
                 <div class="member-card">
-                    <div class="member-photo">[Photo]</div>
+                    <div class="member-photo">
+                        <span class="member-photo-placeholder">[Photo]</span>
+                    </div>
                     <h3>[Name]</h3>
                     <p>Research Assistant</p>
                     <p>[Research interest]</p>
+                </div>
+            </div>
+
+            <!-- 分组2：已毕业成员 -->
+            <h3 class="section-header section-header-alumni">Alumni (Former Members)</h3>
+
+            <div class="members-grid">
+                <!-- 已毕业校友 1 -->
+                <div class="member-card">
+                    <div class="member-photo">
+                        <span class="member-photo-placeholder">[Photo]</span>
+                    </div>
+                    <h3>[Alumni Name]</h3>
+                    <p>PhD (20XX-20XX)</p>
+                </div>
+                <!-- 已毕业校友 2 -->
+                <div class="member-card">
+                    <div class="member-photo">
+                        <span class="member-photo-placeholder">[Photo]</span>
+                    </div>
+                    <h3>[Alumni Name]</h3>
+                    <p>Master (20XX-20XX)</p>
                 </div>
             </div>
         </div>
