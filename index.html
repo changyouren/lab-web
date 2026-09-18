@@ -5,233 +5,814 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lab Name - Academic Website</title>
     <style>
-        /* --- 全局设置 --- */
-        body {
+        /* ================= 基础重置与全局样式 ================= */
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            line-height: 1.8;
             color: #333;
             background-color: #f9f9f9;
+            scroll-behavior: smooth;
+            padding-top: 60px;
         }
-
-        /* --- 导航栏 (复刻截图风格) --- */
-        header {
-            background-color: #1a2b4c; /* 截图中的深蓝色 */
-            position: sticky; /* 吸顶效果 */
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center; /* 菜单居中 */
-            align-items: center;
-            height: 60px;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap; /* 防止小屏幕溢出 */
-            justify-content: center;
-        }
-
-        nav li {
-            margin: 0 15px;
-        }
-
-        nav a {
+        a {
             text-decoration: none;
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: 500;
-            transition: color 0.3s;
+            color: inherit;
         }
-
-        nav a:hover {
-            color: #f1c40f; /* 鼠标悬停变黄 */
+        ul {
+            list-style: none;
         }
-
-        /* 模拟截图中的 "About" 高亮状态 */
-        .active {
-            color: #f1c40f !important; 
-        }
-
-        /* --- 主要内容区域 --- */
-        section {
-            padding: 80px 20px;
-            max-width: 900px;
+        .container {
+            width: 90%;
+            max-width: 1100px;
             margin: 0 auto;
-            border-bottom: 1px solid #eaeaea;
+            padding: 50px 0;
         }
 
-        h1, h2 {
+        /* ================= 顶部导航栏 ================= */
+        header {
+            background-color: #1a2b4c;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 5%;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        header nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        header nav li {
+            margin: 0 4px;
+        }
+        header nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 8px 14px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        header nav a:hover,
+        header nav a.active {
+            color: #facc15;
+            background-color: rgba(255,255,255,0.08);
+        }
+
+        /* ================= 首页大图 (Hero Section) ================= */
+        #home {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://images.unsplash.com/photo-1580674285054-bed31e145f59?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: -60px;
+        }
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        .hero-content h1 {
+            font-size: 2.8em;
+            margin-bottom: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        .hero-content p {
+            font-size: 1.2em;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.7;
+            opacity: 0.95;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* ================= 通用板块卡片样式 ================= */
+        .section-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+        }
+        .section-card h2 {
+            font-size: 1.8em;
+            color: #1a2b4c;
+            margin-bottom: 28px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e8ecf1;
+            position: relative;
+        }
+        .section-card h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background-color: #1a2b4c;
+        }
+        .section-card p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        /* ================= About Us 板块 ================= */
+        .carousel {
+            width: 100%;
+            height: 320px;
+            background-color: #f0f4f8;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #8899aa;
+            font-size: 1.1em;
+            border: 2px dashed #c8d6e5;
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(26,43,76,0.03), rgba(26,43,76,0.06));
+        }
+        .carousel span {
+            position: relative;
+            z-index: 1;
+        }
+        .about-text p {
+            text-align: justify;
+            color: #444;
+            font-size: 15.5px;
+            line-height: 1.85;
+        }
+        .about-text strong {
             color: #1a2b4c;
         }
 
-        h1 { margin-bottom: 10px; }
-        .subtitle { color: #666; font-size: 1.2em; margin-bottom: 30px; display: block;}
+        /* ================= News 板块 ================= */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .news-card {
+            border: 1px solid #e8ecf1;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+        }
+        .news-card-img {
+            width: 100%;
+            height: 160px;
+            background-color: #e8ecf1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #aab7c8;
+            font-size: 14px;
+        }
+        .news-card-content {
+            padding: 18px 20px;
+        }
+        .news-card-date {
+            font-size: 12.5px;
+            color: #999;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .news-card-title {
+            font-size: 14.5px;
+            line-height: 1.55;
+            color: #333;
+        }
+        .news-list {
+            border-top: 1px solid #e8ecf1;
+            padding-top: 20px;
+        }
+        .news-list li {
+            display: flex;
+            padding: 14px 0;
+            border-bottom: 1px solid #f5f7fa;
+            align-items: baseline;
+        }
+        .news-list li:last-child {
+            border-bottom: none;
+        }
+        .news-list .date {
+            flex-basis: 100px;
+            color: #888;
+            font-size: 14px;
+            flex-shrink: 0;
+            font-weight: 500;
+        }
+        .news-list .title {
+            flex: 1;
+            font-size: 14.5px;
+            color: #444;
+        }
 
-        /* --- 成员卡片网格 --- */
+        /* ================= Research 板块 ================= */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+        .research-item {
+            background: #f8fafc;
+            border-left: 4px solid #1a2b4c;
+            border-radius: 6px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        .research-item:hover {
+            background: #eef3f8;
+            transform: translateX(4px);
+        }
+        .research-item h3 {
+            color: #1a2b4c;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .research-item p {
+            color: #555;
+            font-size: 14.5px;
+            line-height: 1.7;
+        }
+
+        /* ================= Members 板块 ================= */
         .members-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+            gap: 28px;
         }
-
         .member-card {
             background: white;
-            padding: 20px;
+            border: 1px solid #e8ecf1;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 28px 20px;
             text-align: center;
+            transition: all 0.3s ease;
         }
-
+        .member-card:hover {
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+        }
         .member-photo {
             width: 100px;
             height: 100px;
-            background-color: #ddd; /* 占位符颜色 */
+            background-color: #e8ecf1;
             border-radius: 50%;
-            margin: 0 auto 15px;
-            display: block;
+            margin: 0 auto 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #aab7c8;
+            font-size: 14px;
+            border: 3px solid #f0f4f8;
+        }
+        .member-card h3 {
+            color: #1a2b4c;
+            font-size: 1.1em;
+            margin-bottom: 6px;
+        }
+        .member-card p {
+            color: #777;
+            font-size: 13.5px;
+            margin-bottom: 4px;
         }
 
-        /* --- 论文列表 --- */
+        /* ================= Collaborations 板块 ================= */
+        .collab-logos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .collab-item {
+            width: 140px;
+            height: 80px;
+            background-color: #f0f4f8;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #8899aa;
+            font-size: 13px;
+            border: 1px solid #e8ecf1;
+            transition: all 0.3s ease;
+        }
+        .collab-item:hover {
+            background-color: #eef3f8;
+            border-color: #c8d6e5;
+        }
+
+        /* ================= Publications 板块 ================= */
         .pub-item {
-            margin-bottom: 20px;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f4f8;
         }
-        .pub-title { font-weight: bold; font-size: 1.1em; }
-        .pub-authors { color: #555; font-style: italic; }
-        .pub-journal { color: #1a2b4c; font-weight: 600; }
+        .pub-item:last-child {
+            border-bottom: none;
+        }
+        .pub-title {
+            font-weight: 700;
+            font-size: 1.08em;
+            color: #1a2b4c;
+            margin-bottom: 6px;
+        }
+        .pub-authors {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .pub-journal {
+            color: #1a2b4c;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        .pub-abstract {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.65;
+            background: #f8fafc;
+            padding: 12px 16px;
+            border-radius: 5px;
+            margin-top: 8px;
+        }
 
-        /* --- 页脚 --- */
-        footer {
+        /* ================= Teaching 板块 ================= */
+        .teaching-list {
+            counter-reset: teaching-counter;
+        }
+        .teaching-item {
+            counter-increment: teaching-counter;
+            padding: 16px 0 16px 40px;
+            position: relative;
+            border-bottom: 1px solid #f0f4f8;
+        }
+        .teaching-item:last-child {
+            border-bottom: none;
+        }
+        .teaching-item::before {
+            content: counter(teaching-counter);
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 28px;
+            height: 28px;
             background-color: #1a2b4c;
             color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .teaching-item h4 {
+            color: #1a2b4c;
+            font-size: 1.05em;
+            margin-bottom: 4px;
+        }
+        .teaching-item p {
+            color: #555;
+            font-size: 14px;
+        }
+
+        /* ================= Join Us 板块 ================= */
+        .join-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        .join-text p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+        .join-info {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #e8ecf1;
+        }
+        .join-info h4 {
+            color: #1a2b4c;
+            margin-bottom: 16px;
+            font-size: 1.15em;
+        }
+        .join-info p {
+            color: #555;
+            font-size: 14.5px;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        /* ================= 底部 (Footer) ================= */
+        footer {
+            background-color: #1a2b4c;
+            color: #aab7c8;
+            padding: 50px 0 30px;
+            margin-top: 60px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 36px;
+        }
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 16px;
+            font-size: 16px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #facc15;
+        }
+        .footer-section p {
+            margin-bottom: 8px;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+        .footer-section a {
+            color: #facc15;
+            transition: color 0.2s;
+        }
+        .footer-section a:hover {
+            color: #fde68a;
+        }
+        .footer-bottom {
             text-align: center;
-            padding: 40px 20px;
-            margin-top: 50px;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 13px;
+            color: #6b7b8d;
+        }
+
+        /* ================= 响应式适配 ================= */
+        @media (max-width: 768px) {
+            header {
+                justify-content: center;
+                padding: 0 3%;
+            }
+            header nav ul {
+                justify-content: center;
+            }
+            header nav li {
+                margin: 2px 2px;
+            }
+            header nav a {
+                padding: 6px 10px;
+                font-size: 13px;
+            }
+            .hero-content h1 {
+                font-size: 1.8em;
+            }
+            .hero-content p {
+                font-size: 1em;
+            }
+            .section-card {
+                padding: 28px 22px;
+            }
+            .section-card h2 {
+                font-size: 1.5em;
+            }
+            .join-content {
+                grid-template-columns: 1fr;
+            }
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            .members-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- 导航栏 -->
+    <!-- ================= 顶部导航栏 ================= -->
     <header>
         <nav>
             <ul>
-                <!-- class="active" 表示当前页面高亮 -->
-                <li><a href="#about" class="active">About</a></li>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#research">Research</a></li>
                 <li><a href="#members">Members</a></li>
                 <li><a href="#collaborations">Collaborations</a></li>
                 <li><a href="#publications">Publications</a></li>
                 <li><a href="#teaching">Teaching</a></li>
-                <li><a href="#join">Join us</a></li>
+                <li><a href="#joinus">Join us</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- About 板块 -->
-    <section id="about">
-        <h1>The [Your Name] Lab</h1>
-        <span class="subtitle">Department of Computer Science, [University Name]</span>
-        <p>Welcome to our research group! We focus on [Research Area 1], [Research Area 2], and [Research Area 3]. Our mission is to explore the boundaries of artificial intelligence and solve real-world problems.</p>
-        <p>This website serves as a hub for our latest findings, team members, and open-source projects.</p>
+    <!-- ================= 首页大图展示 ================= -->
+    <section id="home">
+        <div class="hero-content">
+            <h1>[Your Lab Name]</h1>
+            <p>[A brief tagline describing your lab's research focus and mission. Keep it concise and impactful.]</p>
+        </div>
     </section>
 
-    <!-- Research 板块 -->
-    <section id="research">
-        <h2>Research Interests</h2>
-        <p>Our current research focuses on the following directions:</p>
-        <ul>
-            <li><strong>Machine Learning:</strong> Developing robust algorithms for noisy data.</li>
-            <li><strong>Computer Vision:</strong> Object detection in complex environments.</li>
-            <li><strong>Natural Language Processing:</strong> Understanding context in low-resource languages.</li>
-        </ul>
-    </section>
-
-    <!-- Members 板块 -->
-    <section id="members">
-        <h2>Team Members</h2>
-        <div class="members-grid">
-            <!-- PI -->
-            <div class="member-card">
-                <div class="member-photo"></div> <!-- 这里放照片URL -->
-                <h3>Prof. Jason Iusl</h3>
-                <p>Principal Investigator</p>
+    <!-- ================= About Us 板块 ================= -->
+    <section id="about" class="container">
+        <div class="section-card">
+            <h2>About Us</h2>
+            <div class="carousel">
+                <span>[Image Carousel — Replace with your lab photos / activities]</span>
             </div>
-            <!-- Student 1 -->
-            <div class="member-card">
-                <div class="member-photo"></div>
-                <h3>Alice Smith</h3>
-                <p>Ph.D. Student</p>
-            </div>
-             <!-- Student 2 -->
-             <div class="member-card">
-                <div class="member-photo"></div>
-                <h3>Bob Jones</h3>
-                <p>Master Student</p>
+            <div class="about-text">
+                <p>Welcome to the <strong>[Your Lab Name]</strong> at <strong>[University Name]</strong>! Our research focuses on [Research Area 1], [Research Area 2], and [Research Area 3]. We aim to [brief description of your mission and goals].</p>
+                <p>Our group is dedicated to advancing the frontiers of [your field] through innovative research, collaboration, and education. We welcome motivated students and researchers to join us in making meaningful contributions.</p>
             </div>
         </div>
     </section>
 
-    <!-- Collaborations 板块 -->
-    <section id="collaborations">
-        <h2>Collaborations</h2>
-        <p>We work closely with researchers from:</p>
-        <ul>
-            <li>MIT CSAIL</li>
-            <li>Stanford AI Lab</li>
-            <li>Google Research</li>
-        </ul>
-    </section>
-
-    <!-- Publications 板块 -->
-    <section id="publications">
-        <h2>Selected Publications</h2>
-        
-        <div class="pub-item">
-            <div class="pub-title">Deep Learning for Web Development</div>
-            <div class="pub-authors">J. Iusl, A. Smith, B. Jones</div>
-            <div class="pub-journal">CVPR 2024 (Oral)</div>
-            <p>A novel approach to generating websites using neural networks.</p>
+    <!-- ================= News 板块 ================= -->
+    <section id="news" class="container">
+        <div class="section-card">
+            <h2>News</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-card-img">[News Image 1]</div>
+                    <div class="news-card-content">
+                        <div class="news-card-date">Month Year</div>
+                        <div class="news-card-title">[News headline goes here. Click to read more details about this event or achievement.]</div>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-card-img">[News Image 2]</div>
+                    <div class="news-card-content">
+                        <div class="news-card-date">Month Year</div>
+                        <div class="news-card-title">[Another news item description. Keep titles clear and informative.]</div>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-card-img">[News Image 3]</div>
+                    <div class="news-card-content">
+                        <div class="news-card-date">Month Year</div>
+                        <div class="news-card-title">[Third news item. You can add more cards by copying this block.]</div>
+                    </div>
+                </div>
+            </div>
+            <ul class="news-list">
+                <li><span class="date">Month Year</span><span class="title">[News item title — short description of the event or announcement.]</span></li>
+                <li><span class="date">Month Year</span><span class="title">[Another news item in list format.]</span></li>
+                <li><span class="date">Month Year</span><span class="title">[Additional news item.]</span></li>
+                <li><span class="date">Month Year</span><span class="title">[More news items can be added here.]</span></li>
+                <li><span class="date">Month Year</span><span class="title">[Latest news item goes first.]</span></li>
+            </ul>
         </div>
+    </section>
 
-        <div class="pub-item">
-            <div class="pub-title">Understanding GitHub Pages</div>
-            <div class="pub-authors">J. Iusl</div>
-            <div class="pub-journal">ICML 2023</div>
-            <p>An analysis of static site hosting performance.</p>
+    <!-- ================= Research 板块 ================= -->
+    <section id="research" class="container">
+        <div class="section-card">
+            <h2>Research</h2>
+            <div class="research-grid">
+                <div class="research-item">
+                    <h3>Research Area 1</h3>
+                    <p>[Description of your first research direction. Explain the problem you are solving and why it matters.]</p>
+                </div>
+                <div class="research-item">
+                    <h3>Research Area 2</h3>
+                    <p>[Description of your second research direction. Include key methodologies and applications.]</p>
+                </div>
+                <div class="research-item">
+                    <h3>Research Area 3</h3>
+                    <p>[Description of your third research direction. Mention any recent breakthroughs or projects.]</p>
+                </div>
+                <div class="research-item">
+                    <h3>Research Area 4</h3>
+                    <p>[Description of your fourth research direction. Add as many areas as needed.]</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Teaching 板块 -->
-    <section id="teaching">
-        <h2>Teaching</h2>
-        <ul>
-            <li><strong>CS101:</strong> Introduction to Programming (Fall 2024)</li>
-            <li><strong>CS202:</strong> Data Structures and Algorithms (Spring 2024)</li>
-        </ul>
+    <!-- ================= Members 板块 ================= -->
+    <section id="members" class="container">
+        <div class="section-card">
+            <h2>Members</h2>
+            <div class="members-grid">
+                <div class="member-card">
+                    <div class="member-photo">[Photo]</div>
+                    <h3>[Name]</h3>
+                    <p>Principal Investigator</p>
+                    <p>[Short bio or role description]</p>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">[Photo]</div>
+                    <h3>[Name]</h3>
+                    <p>Ph.D. Student</p>
+                    <p>[Research interest]</p>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">[Photo]</div>
+                    <h3>[Name]</h3>
+                    <p>Master Student</p>
+                    <p>[Research interest]</p>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">[Photo]</div>
+                    <h3>[Name]</h3>
+                    <p>Research Assistant</p>
+                    <p>[Research interest]</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Join Us 板块 -->
-    <section id="join">
-        <h2>Join Us</h2>
-        <p>We are always looking for motivated students and postdocs. If you are interested in our research, please send your CV and a brief research statement to email@example.com.</p>
+    <!-- ================= Collaborations 板块 ================= -->
+    <section id="collaborations" class="container">
+        <div class="section-card">
+            <h2>Collaborations</h2>
+            <p>We collaborate with researchers and institutions worldwide. Our current partners include:</p>
+            <div class="collab-logos">
+                <div class="collab-item">[Partner 1]</div>
+                <div class="collab-item">[Partner 2]</div>
+                <div class="collab-item">[Partner 3]</div>
+                <div class="collab-item">[Partner 4]</div>
+                <div class="collab-item">[Partner 5]</div>
+                <div class="collab-item">[Partner 6]</div>
+            </div>
+        </div>
     </section>
 
+    <!-- ================= Publications 板块 ================= -->
+    <section id="publications" class="container">
+        <div class="section-card">
+            <h2>Publications</h2>
+            <div class="pub-item">
+                <div class="pub-title">[Paper Title Goes Here — Make it Descriptive and Clear]</div>
+                <div class="pub-authors"><strong>[Your Name]</strong>, Coauthor One, Coauthor Two</div>
+                <div class="pub-journal">Journal Name, Volume(Issue), Pages (Year)</div>
+                <div class="pub-abstract">[Optional: Add a brief abstract or summary of the paper's contribution.]</div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-title">[Another Publication Title]</div>
+                <div class="pub-authors">Coauthor One, <strong>[Your Name]</strong>, Coauthor Two</div>
+                <div class="pub-journal">Conference Name, Pages (Year)</div>
+                <div class="pub-abstract">[Optional abstract or notes.]</div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-title">[Third Publication Title]</div>
+                <div class="pub-authors"><strong>[Your Name]</strong>, Coauthor One</div>
+                <div class="pub-journal">Journal Name, Volume(Issue), Pages (Year)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= Teaching 板块 ================= -->
+    <section id="teaching" class="container">
+        <div class="section-card">
+            <h2>Teaching</h2>
+            <div class="teaching-list">
+                <div class="teaching-item">
+                    <h4>[Course Name 1]</h4>
+                    <p>[Semester, Year] — [Brief description of the course and your role]</p>
+                </div>
+                <div class="teaching-item">
+                    <h4>[Course Name 2]</h4>
+                    <p>[Semester, Year] — [Brief description of the course and your role]</p>
+                </div>
+                <div class="teaching-item">
+                    <h4>[Course Name 3]</h4>
+                    <p>[Semester, Year] — [Brief description of the course and your role]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= Join Us 板块 ================= -->
+    <section id="joinus" class="container">
+        <div class="section-card">
+            <h2>Join Us</h2>
+            <div class="join-content">
+                <div class="join-text">
+                    <p>We are always looking for talented and motivated students to join our team. If you are interested in [your research areas], we encourage you to apply.</p>
+                    <p>We currently have openings for:</p>
+                    <ul style="padding-left: 20px; color: #555; font-size: 15px; line-height: 1.8;">
+                        <li>• Ph.D. students (starting Fall 20XX)</li>
+                        <li>• Master's students</li>
+                        <li>• Research assistants</li>
+                        <li>• Postdoctoral fellows</li>
+                    </ul>
+                </div>
+                <div class="join-info">
+                    <h4>How to Apply</h4>
+                    <p>Please send the following materials to <strong>[email@example.com]</strong>:</p>
+                    <p>1. Curriculum Vitae (CV)</p>
+                    <p>2. Transcript of records</p>
+                    <p>3. Statement of research interests</p>
+                    <p>4. Names of 2-3 references</p>
+                    <p style="margin-top: 16px; font-size: 13.5px; color: #888;">Application deadline: [Date]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 底部联系方式 (Footer) ================= -->
     <footer>
-        <p>&copy; 2024 The Jason Iusl Lab. All rights reserved.</p>
-        <p>Built with GitHub Pages.</p>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>Lab</h4>
+                <p><strong>[Your Lab Name]</strong></p>
+                <p>[Building/Room Number]</p>
+                <p>[University Name]</p>
+                <p>[Address Line 1]</p>
+                <p>[City, Postal Code, Country]</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><strong>Prof. [Last Name]</strong></p>
+                <p>Email: <a href="mailto:email@example.com">email@example.com</a></p>
+                <p>Tel: [+XX XXX XXXX]</p>
+                <p>Fax: [+XX XXX XXXX]</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links</h4>
+                <p><a href="https://github.com">GitHub</a></p>
+                <p><a href="https://scholar.google.com">Google Scholar</a></p>
+                <p><a href="https://university.edu">University Website</a></p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 [Your Lab Name]. All rights reserved. | Built with GitHub Pages</p>
+        </div>
     </footer>
+
+    <!-- ================= 导航高亮交互脚本 ================= -->
+    <script>
+        // 当页面滚动时，自动高亮当前对应的导航项
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('header nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
