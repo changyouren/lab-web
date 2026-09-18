@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Name - Academic Website</title>
+    <style>
+        /* --- 全局设置 --- */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* --- 导航栏 (复刻截图风格) --- */
+        header {
+            background-color: #1a2b4c; /* 截图中的深蓝色 */
+            position: sticky; /* 吸顶效果 */
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center; /* 菜单居中 */
+            align-items: center;
+            height: 60px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap; /* 防止小屏幕溢出 */
+            justify-content: center;
+        }
+
+        nav li {
+            margin: 0 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #f1c40f; /* 鼠标悬停变黄 */
+        }
+
+        /* 模拟截图中的 "About" 高亮状态 */
+        .active {
+            color: #f1c40f !important; 
+        }
+
+        /* --- 主要内容区域 --- */
+        section {
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        h1, h2 {
+            color: #1a2b4c;
+        }
+
+        h1 { margin-bottom: 10px; }
+        .subtitle { color: #666; font-size: 1.2em; margin-bottom: 30px; display: block;}
+
+        /* --- 成员卡片网格 --- */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .member-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .member-photo {
+            width: 100px;
+            height: 100px;
+            background-color: #ddd; /* 占位符颜色 */
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: block;
+        }
+
+        /* --- 论文列表 --- */
+        .pub-item {
+            margin-bottom: 20px;
+        }
+        .pub-title { font-weight: bold; font-size: 1.1em; }
+        .pub-authors { color: #555; font-style: italic; }
+        .pub-journal { color: #1a2b4c; font-weight: 600; }
+
+        /* --- 页脚 --- */
+        footer {
+            background-color: #1a2b4c;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <header>
+        <nav>
+            <ul>
+                <!-- class="active" 表示当前页面高亮 -->
+                <li><a href="#about" class="active">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#members">Members</a></li>
+                <li><a href="#collaborations">Collaborations</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#teaching">Teaching</a></li>
+                <li><a href="#join">Join us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About 板块 -->
+    <section id="about">
+        <h1>The [Your Name] Lab</h1>
+        <span class="subtitle">Department of Computer Science, [University Name]</span>
+        <p>Welcome to our research group! We focus on [Research Area 1], [Research Area 2], and [Research Area 3]. Our mission is to explore the boundaries of artificial intelligence and solve real-world problems.</p>
+        <p>This website serves as a hub for our latest findings, team members, and open-source projects.</p>
+    </section>
+
+    <!-- Research 板块 -->
+    <section id="research">
+        <h2>Research Interests</h2>
+        <p>Our current research focuses on the following directions:</p>
+        <ul>
+            <li><strong>Machine Learning:</strong> Developing robust algorithms for noisy data.</li>
+            <li><strong>Computer Vision:</strong> Object detection in complex environments.</li>
+            <li><strong>Natural Language Processing:</strong> Understanding context in low-resource languages.</li>
+        </ul>
+    </section>
+
+    <!-- Members 板块 -->
+    <section id="members">
+        <h2>Team Members</h2>
+        <div class="members-grid">
+            <!-- PI -->
+            <div class="member-card">
+                <div class="member-photo"></div> <!-- 这里放照片URL -->
+                <h3>Prof. Jason Iusl</h3>
+                <p>Principal Investigator</p>
+            </div>
+            <!-- Student 1 -->
+            <div class="member-card">
+                <div class="member-photo"></div>
+                <h3>Alice Smith</h3>
+                <p>Ph.D. Student</p>
+            </div>
+             <!-- Student 2 -->
+             <div class="member-card">
+                <div class="member-photo"></div>
+                <h3>Bob Jones</h3>
+                <p>Master Student</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collaborations 板块 -->
+    <section id="collaborations">
+        <h2>Collaborations</h2>
+        <p>We work closely with researchers from:</p>
+        <ul>
+            <li>MIT CSAIL</li>
+            <li>Stanford AI Lab</li>
+            <li>Google Research</li>
+        </ul>
+    </section>
+
+    <!-- Publications 板块 -->
+    <section id="publications">
+        <h2>Selected Publications</h2>
+        
+        <div class="pub-item">
+            <div class="pub-title">Deep Learning for Web Development</div>
+            <div class="pub-authors">J. Iusl, A. Smith, B. Jones</div>
+            <div class="pub-journal">CVPR 2024 (Oral)</div>
+            <p>A novel approach to generating websites using neural networks.</p>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">Understanding GitHub Pages</div>
+            <div class="pub-authors">J. Iusl</div>
+            <div class="pub-journal">ICML 2023</div>
+            <p>An analysis of static site hosting performance.</p>
+        </div>
+    </section>
+
+    <!-- Teaching 板块 -->
+    <section id="teaching">
+        <h2>Teaching</h2>
+        <ul>
+            <li><strong>CS101:</strong> Introduction to Programming (Fall 2024)</li>
+            <li><strong>CS202:</strong> Data Structures and Algorithms (Spring 2024)</li>
+        </ul>
+    </section>
+
+    <!-- Join Us 板块 -->
+    <section id="join">
+        <h2>Join Us</h2>
+        <p>We are always looking for motivated students and postdocs. If you are interested in our research, please send your CV and a brief research statement to email@example.com.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 The Jason Iusl Lab. All rights reserved.</p>
+        <p>Built with GitHub Pages.</p>
+    </footer>
+
+</body>
+</html>
